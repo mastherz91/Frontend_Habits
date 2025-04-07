@@ -92,18 +92,19 @@ export default function Habits() {
 
     console.log("Habits cargados:", habits); // Verifica qué está llegando
 
-    if (status === "loading") return <p>Loading...</p>;
-    if (error) return <p className="text-red-500">{error}</p>;
-
-
-    // ...
-
     useEffect(() => {
         const token = getCookie("habitToken");
         if (token) {
             dispatch(fetchHabitsThunk(token));
         }
     }, [dispatch]);
+
+    if (status === "loading") return <p>Loading...</p>;
+    if (error) return <p className="text-red-500">{error}</p>;
+
+
+    // ...
+
 
 
 
