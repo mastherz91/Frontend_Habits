@@ -1,5 +1,5 @@
 export const fetchHabits = async (token) => {
-    const response = await fetch('http://localhost:5000/habits', {
+    const response = await fetch('https://backend-habits-nine.vercel.app/habits', {
         headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -12,7 +12,7 @@ export const fetchHabits = async (token) => {
 
 export const fetchAddHabit = async ({ token, name, description, category, frequency, duration }) => {
     console.log("TOKEN QUE ENVÍAS:", token);
-    const response = await fetch('http://localhost:5000/habits', {
+    const response = await fetch('https://backend-habits-nine.vercel.app/habits', {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -30,7 +30,7 @@ export const fetchAddHabit = async ({ token, name, description, category, freque
 
 export const fetchDone = async ({ id, token }) => {
     console.log("ID QUE ENVÍAS:", id);
-    const response = await fetch(`http://localhost:5000/habits/${id}`, {
+    const response = await fetch(`https://backend-habits-nine.vercel.app/habits/${id}`, {
         method: 'PATCH',
         headers: { Authorization: `Bearer ${token}` },
     });
