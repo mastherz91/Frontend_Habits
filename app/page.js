@@ -34,8 +34,6 @@ export default function Home() {
     if (fetchLoginUserThunk.fulfilled.match(result)) {
       const token = result.payload.token; //  backend devuelve "token"
       document.cookie = `habitToken=${token}; path=/`;
-
-      dispatch(fetchHabitsThunk(token)); //  recarga hábitos después del login
     } else {
       alert("Login fallido");
     }

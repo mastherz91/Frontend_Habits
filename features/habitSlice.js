@@ -12,25 +12,31 @@ export const fetchHabitsThunk = createAsyncThunk('habits/fetchHabits', async (to
     return response;
 });
 
-// Acción asíncrona para marcar un hábito como hecho
-export const markHabitDoneThunk = createAsyncThunk('habits/markHabitDone', async ({ id, token }, { rejectWithValue }) => {
-    console.log("ID del hábito:_4", id);
-    try {
-        const response = await fetchDone({ id, token });
+export const markHabitDoneThunk = createAsyncThunk(
+    'habits/markHabitDone',
+    async ({ id, token }, { dispatch, rejectWithValue }) => {
+        console.log("ID del hábito:_4", id);
+        try {
+            const response = await fetchDone({ id, token });
 
-        if (!response) {
-            console.error("Backend error:", response); // Log detallado
-            return rejectWithValue(response.error || "Failed to mark habit as done");
-        } else if (response.message === "Habit restarted") {
-            return rejectWithValue(response.message);
-        } else {
-            return response.message;
+            if (!response) {
+                console.error("Backend error:", response);
+                return rejectWithValue(response.error || "Failed to mark habit as done");
+            } else if (response.message === "Habit restarted") {
+                console.log("Hábito reiniciado:", response);
+                await dispatch(fetchHabitsThunk(token)); // Recargar hábitos después de reiniciar
+                return response.message;
+            } else {
+                await dispatch(fetchHabitsThunk(token)); //   Recargar hábitos después de marcar como hecho
+                return response.message;
+            }
+        } catch (error) {
+            console.error("Network error:", error);
+            return rejectWithValue(error.message);
         }
-    } catch (error) {
-        console.error("Network error:", error); // Log de errores de red
-        return rejectWithValue(error.message);
     }
-});
+);
+
 
 
 export const fetchAddHabitThunk = createAsyncThunk(
