@@ -89,24 +89,19 @@ export default function Habits() {
         }, 4000);
     };
 
-
-    console.log("Habits cargados:", habits); // Verifica qué está llegando
-
     useEffect(() => {
         const token = getCookie("habitToken");
         if (token) {
             dispatch(fetchHabitsThunk(token));
+        } else {
+            console.error("No se encontró el token en las cookies.");
         }
     }, [dispatch]);
 
+    console.log("Habits cargados:", habits); // Verifica qué está llegando
+
     if (status === "loading") return <p>Loading...</p>;
     if (error) return <p className="text-red-500">{error}</p>;
-
-
-    // ...
-
-
-
 
     return (
         <div className="p-6 bg-gray-50 min-h-screen">

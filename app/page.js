@@ -53,10 +53,10 @@ export default function Home() {
 
       {!user && (
         <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
-          <h1 className="text-2xl font-bold mb-4 text-center">Login</h1>
+          <h1 className="text-2xl font-bold mb-4 text-center text-black">Login</h1>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Username</label>
+            <label className="block text-sm font-medium mb-1 text-black">Username</label>
             <input
               type="text"
               value={username}
@@ -67,7 +67,7 @@ export default function Home() {
           </div>
 
           <div className="mb-6">
-            <label className="block text-sm font-medium mb-1">Password</label>
+            <label className="block text-sm font-medium mb-1 text-black">Password</label>
             <input
               type="password"
               value={password}
