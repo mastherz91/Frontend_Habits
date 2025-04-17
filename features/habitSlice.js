@@ -26,11 +26,11 @@ export const markHabitDoneThunk = createAsyncThunk(
             } else if (response.message === "Habit restarted") {
                 console.log("Hábito reiniciado:", response);
                 await dispatch(fetchHabitsThunk(token)); // Recargar hábitos después de reiniciar
-                return response;
+                return response.message;
 
             } else {
                 await dispatch(fetchHabitsThunk(token)); //   Recargar hábitos después de marcar como hecho
-                return response;
+                return response.message;
             }
         } catch (error) {
             console.error("Network error:", error);
