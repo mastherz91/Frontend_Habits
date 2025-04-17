@@ -31,14 +31,14 @@ export default function Home() {
     const result = await dispatch(fetchLoginUserThunk({ username, password }));
     console.log("Resultado del login:", result);
 
-    // if (fetchLoginUserThunk.fulfilled.match(result)) {
-    //   const token = result.payload.token; //  backend devuelve "token"
-    //   document.cookie = `habitToken=${token}; path=/`;
+    if (fetchLoginUserThunk.fulfilled.match(result)) {
+      const token = result.payload.token; //  backend devuelve "token"
+      document.cookie = `habitToken=${token}; path=/`;
 
-    //   dispatch(fetchHabitsThunk(token)); //  recarga hábitos después del login
-    // } else {
-    //   alert("Login fallido");
-    // }
+      dispatch(fetchHabitsThunk(token)); //  recarga hábitos después del login
+    } else {
+      alert("Login fallido");
+    }
   };
 
   const handleRegister = (e) => {
