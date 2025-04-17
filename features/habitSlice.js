@@ -22,13 +22,15 @@ export const markHabitDoneThunk = createAsyncThunk(
             if (!response) {
                 console.error("Backend error:", response);
                 return rejectWithValue(response.error || "Failed to mark habit as done");
+
             } else if (response.message === "Habit restarted") {
                 console.log("Hábito reiniciado:", response);
                 await dispatch(fetchHabitsThunk(token)); // Recargar hábitos después de reiniciar
-                return response.message;
+                return response;
+
             } else {
                 await dispatch(fetchHabitsThunk(token)); //   Recargar hábitos después de marcar como hecho
-                return response.message;
+                return response;
             }
         } catch (error) {
             console.error("Network error:", error);

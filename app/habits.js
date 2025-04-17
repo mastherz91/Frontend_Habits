@@ -173,7 +173,7 @@ export default function Habits() {
                             const dias = Math.ceil(diferenciaEnMilisegundos / (1000 * 60 * 60 * 24));
 
                             if (dias > 0) {
-                                setDuration(dias.toString()); // ✅ guardamos como string, ya que duration es texto
+                                setDuration(dias.toString()); //  guardamos como string, ya que duration es texto
                             } else {
                                 alert("Selecciona una fecha futura válida");
                                 setDuration("");
