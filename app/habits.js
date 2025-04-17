@@ -23,9 +23,11 @@ export default function Habits() {
     const [frequency, setFrequency] = useState("");
     const [duration, setDuration] = useState("");
 
-    const calculatedProgress = (days) => {
-        return Math.min((days / 66) * 100, 100);
+    const calculatedProgress = (days, duration) => {
+        const total = parseInt(duration) || 1; // evitar división entre 0 o NaN
+        return Math.min((days / total) * 100, 100);
     };
+
 
     const handleAddHabit = () => {
         if (!name || !description) {
@@ -219,8 +221,12 @@ export default function Habits() {
                                 <div className="relative w-full h-4 bg-gray-200 rounded-full">
                                     <div
                                         className="absolute top-0 left-0 h-full bg-gradient-to-r from-teal-400 to-teal-600 rounded-full"
-                                        style={{ width: `${calculatedProgress(habit.days || 0)}%` }}
+                                        style={{ width: `${calculatedProgress(habit.days || 0, habit.duration)}%`, transition: "width 0.5s ease-in-out" }}
+
                                     ></div>
+                                    <span className="absolute -top-6 right-2 text-sm text-black font-medium">
+                                        {Math.round(calculatedProgress(habit.days || 0, habit.duration))}%
+                                    </span>
                                 </div>
                             </div>
 
